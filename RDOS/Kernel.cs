@@ -21,7 +21,7 @@ namespace RobDEV_DOS
         protected override void Run()
         {
 
-            Console.Write("#Input: ");
+            Console.Write("0: ");
             var input = Console.ReadLine();
             Console.Write("Text typed: ");
             Console.WriteLine(input);
@@ -30,23 +30,23 @@ namespace RobDEV_DOS
             {
                 if (a.StartsWith("mkdir "))
                 {
-                    Sys.FileSystem.VFS.VFSManager.CreateDirectory("0:" + a.Substring(6));
+                    Sys.FileSystem.VFS.VFSManager.CreateDirectory("0:\\" + a.Substring(6));
                     Console.WriteLine("Done!");
                 }
                 if (a.StartsWith("mkfile "))
                 {
-                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:" + a.Substring(7));
+                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\" + a.Substring(7));
                     //Sys.FileSystem.VFS.VFSManager.CreateFile("0:\file.txt");
                     Console.WriteLine("Done!");
                 }
                 if (a.StartsWith("deldir "))
                 {
-                    Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:" + a.Substring(8), true);
+                    Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(8), true);
                     Console.WriteLine("Done!");
                 }
                 if (a.StartsWith("delfile "))
                 {
-                    Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:" + a.Substring(9), true);
+                    Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(9), true);
                     Console.WriteLine("Done!");
                 }
 
@@ -102,12 +102,26 @@ namespace RobDEV_DOS
                     string Files = Sys.FileSystem.VFS.VFSManager.InternalGetFileDirectoryNames("0:\\", "0:\\", "", true, true, System.IO.SearchOption.AllDirectories).ToString();
                     Console.WriteLine(Files);
                 }
-                if (a.StartsWith("speaker a"))
+                if (a.StartsWith("speaker C"))
                 {
                     AIC.Core.PCSpeaker.sound_on();
-                    AIC.Core.PCSpeaker.Beep(x);
+                    AIC.Core.PCSpeaker.Beep(00);
                     AIC.Core.PCSpeaker.sound_off();
                 }
+                if (a.StartsWith("speaker C#"))
+                {
+                    AIC.Core.PCSpeaker.sound_on();
+                    AIC.Core.PCSpeaker.Beep(01);
+                    AIC.Core.PCSpeaker.sound_off();
+                }
+                if (a.StartsWith("speaker D"))
+                {
+                    AIC.Core.PCSpeaker.sound_on();
+                    AIC.Core.PCSpeaker.Beep(02);
+                    AIC.Core.PCSpeaker.sound_off();
+                }
+
+
                 if (input == "about")
                 {
                     string ram = AIC.Core.GetRAM.GetAmountOfRAM.ToString();
@@ -136,10 +150,10 @@ namespace RobDEV_DOS
 
                 }
 
-                if (input == "RobDEV Basic")
+                if (input == "rdbasic")
                 {
-                    AIC_Framework.Bluescreen.Init("RD 0001", "cannot enter undone things", true);
-
+                    Console.Clear();
+                    RDOS.RBasic.loop();
                 }
 
 
@@ -151,12 +165,13 @@ namespace RobDEV_DOS
                     Console.WriteLine("deldir 0:/dirname  delets a directory");
                     Console.WriteLine("delfile 0:/filename  delets a file");
                     Console.WriteLine("files  shows all files and directorys");
-                    Console.WriteLine("speaker play a sound");
+                    Console.WriteLine("speaker c d and more play a sound");
                     Console.WriteLine("about  shows all the system version and ram memory");
                     Console.WriteLine("time shows the time and date");
                     Console.WriteLine("reboot  reboots the computer");
                     Console.WriteLine("shutdown shutdown the computer");
-
+                    Console.WriteLine("shutdown shutdown the computer");
+                    Console.WriteLine("rdbasic RobDEVBasic a simple programming lanuge");
 
 
 

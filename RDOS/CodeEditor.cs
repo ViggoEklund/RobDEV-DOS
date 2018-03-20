@@ -12,9 +12,6 @@ namespace RDOS
     {
         public static void Run(string file)
         {
-
-            Console.WriteLine("Save| Load | Exit");
-            
         }
     }
 }

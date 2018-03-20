@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
 using Cosmos.HAL;
-
+using System.IO;
 
 namespace RobDEV_DOS
 {
@@ -35,7 +35,7 @@ namespace RobDEV_DOS
                 }
                 if (a.StartsWith("mkfile "))
                 {
-                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:" + a.Substring(8));
+                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:" + a.Substring(7));
                     //Sys.FileSystem.VFS.VFSManager.CreateFile("0:\file.txt");
                     Console.WriteLine("Done!");
                 }
@@ -50,11 +50,37 @@ namespace RobDEV_DOS
                     Console.WriteLine("Done!");
                 }
 
+
                 if (a.StartsWith("run "))
                 {
-                    string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:" + a.Substring(5)).ToString();
-                    Console.WriteLine("Done!");
+                    string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:\\program.txt").ToString();
+                    RDOS.hardware.Program.Load(program);
                 }
+
+                if (a.StartsWith("mkprogram "))
+                {
+                    
+                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\program.txtaaa");
+                    StreamWriter file = new StreamWriter("0:\\program.txt");
+                    file.WriteLine(a.Substring(11));
+                    file.Close();
+                }
+                if (a.StartsWith("print "))
+                {
+                    Console.Write(a.Substring(6));
+                }
+
+                if (a.StartsWith("randomnumber"))
+                {
+                    var ran = new AIC_Framework.Random();
+                    ran.Next(0, 999999999);
+                    string num = ran.ToString();
+                    Console.WriteLine(num);
+                  
+                }
+
+
+
 
                 if (a.StartsWith("code editor "))
                 {
@@ -76,9 +102,8 @@ namespace RobDEV_DOS
                     string Files = Sys.FileSystem.VFS.VFSManager.InternalGetFileDirectoryNames("0:\\", "0:\\", "", true, true, System.IO.SearchOption.AllDirectories).ToString();
                     Console.WriteLine(Files);
                 }
-                if (a.StartsWith("speaker "))
+                if (a.StartsWith("speaker a"))
                 {
-                    uint x = UInt32.Parse(a.Substring(9));
                     AIC.Core.PCSpeaker.sound_on();
                     AIC.Core.PCSpeaker.Beep(x);
                     AIC.Core.PCSpeaker.sound_off();
@@ -106,6 +131,12 @@ namespace RobDEV_DOS
 
                 }
                 if (input == "test")
+                {
+                    AIC_Framework.Bluescreen.Init("RD 0001", "cannot enter undone things", true);
+
+                }
+
+                if (input == "RobDEV Basic")
                 {
                     AIC_Framework.Bluescreen.Init("RD 0001", "cannot enter undone things", true);
 

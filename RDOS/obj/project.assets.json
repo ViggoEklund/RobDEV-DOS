@@ -280,7 +280,7 @@
   },
   "libraries": {
     "Cosmos.Build/2018.3.20": {
-      "sha512": "PvHnVvBOkcvjAPMmveVGgfRkp/BPTzhAiezJfq0UQDySqdUzIWQhCU7wQPnBtqViA/dVJE+6SLfyTqaqM3BOfw==",
+      "sha512": "qjqJdYdmjhxdOUxgfTd2VXr7ZloZ8gBzFV2EpBVbuESgpeadsz2NqP0hunkyMD+nlWBxRb9LowerflY3GV3Eog==",
       "type": "package",
       "path": "cosmos.build/2018.3.20",
       "files": [
@@ -306,7 +306,7 @@
       ]
     },
     "Cosmos.Common/2018.3.20": {
-      "sha512": "SqaNYu48ppy8lKqcF0PERgQiT4/7S+I2H5ziUOA0yGDs+8rnzjGLjhwkJ8ysLwPGHDUYdQiXnbHGSvER5d0XKw==",
+      "sha512": "2j/L0kpVY8O72nrZG2htQM6MN3sHVJ49bINTQ2VpdIEYrjyPBj+bWtbIseRyL1ktVWHZKRWSLXCTMTmNrqJCuw==",
       "type": "package",
       "path": "cosmos.common/2018.3.20",
       "files": [
@@ -316,7 +316,7 @@
       ]
     },
     "Cosmos.Core/2018.3.20": {
-      "sha512": "fT2oQOK4p+RbqROrshVmht1IuRnfbyCI+X7SLwOsjfttv/gX6Ywp3R3IKFC2eMgN0T2zFI31V1K8jjTVl6Kkkg==",
+      "sha512": "+q5amQJa5nXKrWou5Q26YV7T9OaIP9B9ep2XFhUhg/YG5b9y4EibVnrtwOSoYcG/NHev/Zncpv9HXzzfV2x/7Q==",
       "type": "package",
       "path": "cosmos.core/2018.3.20",
       "files": [
@@ -326,7 +326,7 @@
       ]
     },
     "Cosmos.Debug.Kernel/2018.3.20": {
-      "sha512": "gXVsIFjUMJqLMt50JGoRpHpLncNJCo1YMEnlVkZbu7+AJCpvEk6jx+RiUI9PHfXvOpLbg9hP7cZDytUebwbyWA==",
+      "sha512": "4OtQlziNsXDapgubpmsz5g5NXurAlx0tdALoamGyvxuEVrmbDKw6MMI+nh/a+8fUKBWwDWN3v9bSZ1l5JE1oIg==",
       "type": "package",
       "path": "cosmos.debug.kernel/2018.3.20",
       "files": [
@@ -336,7 +336,7 @@
       ]
     },
     "Cosmos.HAL2/2018.3.20": {
-      "sha512": "PPHLt0V8FrtXLH+VWbdOKQYA98zF+qKR5hcoDgLsUQ1d5x3YUs1QZqf6dLoePta4g3yoZX4pjMP7CdbpUQRIkg==",
+      "sha512": "N9qTsbpU6jro3jyDiW2JFGHLSquMKkMA+4BAiasztveKKpeOe9p/j44xpQp+KirV9p61VneQaw2oDAffs3k3wQ==",
       "type": "package",
       "path": "cosmos.hal2/2018.3.20",
       "files": [
@@ -346,7 +346,7 @@
       ]
     },
     "Cosmos.System2/2018.3.20": {
-      "sha512": "6KBNPmRiCsdaRdlHhsDndBKMYhJXl7MKpTRFh+/NKsDH/DXiSo26D7sSJc+Bzl70dax12dlLyjiMm5erMNjSfw==",
+      "sha512": "ih6bQaNa+KVBV8k6JpVuW97kKCpF/ce8o+sd/2Yr1rNMc38iokZOmv+CzziuXpGz5nqitWkqQzVbYQEMlK5IPA==",
       "type": "package",
       "path": "cosmos.system2/2018.3.20",
       "files": [

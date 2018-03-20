@@ -1,0 +1,160 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "bcd76cdb8bf61ff97ab7feba479c8eb387a1a9df"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "RDOS/1.0.0": {
+        "dependencies": {
+          "Cosmos.Build": "2018.3.20",
+          "Cosmos.Debug.Kernel": "2018.3.20",
+          "Cosmos.System2": "2018.3.20",
+          "AIC Framework": "1.0.0.0",
+          "AIC.Core": "1.0.0.0",
+          "AIC.Hardware": "1.0.0.0"
+        },
+        "runtime": {
+          "RDOS.dll": {}
+        }
+      },
+      "Cosmos.Build/2018.3.20": {},
+      "Cosmos.Common/2018.3.20": {
+        "dependencies": {
+          "Cosmos.Debug.Kernel": "2018.3.20"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cosmos.Common.dll": {}
+        }
+      },
+      "Cosmos.Core/2018.3.20": {
+        "dependencies": {
+          "Cosmos.Debug.Kernel": "2018.3.20",
+          "IL2CPU.API": "2018.3.20"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cosmos.Core.dll": {}
+        }
+      },
+      "Cosmos.Debug.Kernel/2018.3.20": {
+        "runtime": {
+          "lib/netstandard2.0/Cosmos.Debug.Kernel.dll": {}
+        }
+      },
+      "Cosmos.HAL2/2018.3.20": {
+        "dependencies": {
+          "Cosmos.Common": "2018.3.20",
+          "Cosmos.Core": "2018.3.20",
+          "Cosmos.Debug.Kernel": "2018.3.20",
+          "IL2CPU.API": "2018.3.20"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cosmos.HAL2.dll": {}
+        }
+      },
+      "Cosmos.System2/2018.3.20": {
+        "dependencies": {
+          "Cosmos.Common": "2018.3.20",
+          "Cosmos.Debug.Kernel": "2018.3.20",
+          "Cosmos.HAL2": "2018.3.20",
+          "IL2CPU.API": "2018.3.20"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Cosmos.System2.dll": {}
+        }
+      },
+      "IL2CPU.API/2018.3.20": {
+        "runtime": {
+          "lib/netstandard2.0/IL2CPU.API.dll": {}
+        }
+      },
+      "AIC Framework/1.0.0.0": {
+        "runtime": {
+          "AIC Framework.dll": {}
+        }
+      },
+      "AIC.Core/1.0.0.0": {
+        "runtime": {
+          "AIC.Core.dll": {}
+        }
+      },
+      "AIC.Hardware/1.0.0.0": {
+        "runtime": {
+          "AIC.Hardware.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "RDOS/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cosmos.Build/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PvHnVvBOkcvjAPMmveVGgfRkp/BPTzhAiezJfq0UQDySqdUzIWQhCU7wQPnBtqViA/dVJE+6SLfyTqaqM3BOfw==",
+      "path": "cosmos.build/2018.3.20",
+      "hashPath": "cosmos.build.2018.3.20.nupkg.sha512"
+    },
+    "Cosmos.Common/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SqaNYu48ppy8lKqcF0PERgQiT4/7S+I2H5ziUOA0yGDs+8rnzjGLjhwkJ8ysLwPGHDUYdQiXnbHGSvER5d0XKw==",
+      "path": "cosmos.common/2018.3.20",
+      "hashPath": "cosmos.common.2018.3.20.nupkg.sha512"
+    },
+    "Cosmos.Core/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fT2oQOK4p+RbqROrshVmht1IuRnfbyCI+X7SLwOsjfttv/gX6Ywp3R3IKFC2eMgN0T2zFI31V1K8jjTVl6Kkkg==",
+      "path": "cosmos.core/2018.3.20",
+      "hashPath": "cosmos.core.2018.3.20.nupkg.sha512"
+    },
+    "Cosmos.Debug.Kernel/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gXVsIFjUMJqLMt50JGoRpHpLncNJCo1YMEnlVkZbu7+AJCpvEk6jx+RiUI9PHfXvOpLbg9hP7cZDytUebwbyWA==",
+      "path": "cosmos.debug.kernel/2018.3.20",
+      "hashPath": "cosmos.debug.kernel.2018.3.20.nupkg.sha512"
+    },
+    "Cosmos.HAL2/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PPHLt0V8FrtXLH+VWbdOKQYA98zF+qKR5hcoDgLsUQ1d5x3YUs1QZqf6dLoePta4g3yoZX4pjMP7CdbpUQRIkg==",
+      "path": "cosmos.hal2/2018.3.20",
+      "hashPath": "cosmos.hal2.2018.3.20.nupkg.sha512"
+    },
+    "Cosmos.System2/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6KBNPmRiCsdaRdlHhsDndBKMYhJXl7MKpTRFh+/NKsDH/DXiSo26D7sSJc+Bzl70dax12dlLyjiMm5erMNjSfw==",
+      "path": "cosmos.system2/2018.3.20",
+      "hashPath": "cosmos.system2.2018.3.20.nupkg.sha512"
+    },
+    "IL2CPU.API/2018.3.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0I4gaH+eNqERKYiLi38EkRwJcu9nUEt/55CgmXrILUIi5assImcwSEo9RfE72PgEXuhLnwl/FUW3uTgwSS44fA==",
+      "path": "il2cpu.api/2018.3.20",
+      "hashPath": "il2cpu.api.2018.3.20.nupkg.sha512"
+    },
+    "AIC Framework/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AIC.Core/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AIC.Hardware/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

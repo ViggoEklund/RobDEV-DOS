@@ -52,7 +52,12 @@ namespace RobDEV_DOS
 
                 if (a.StartsWith("run "))
                 {
-                    
+                    string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:" + a.Substring(5)).ToString();
+                    Console.WriteLine("Done!");
+                }
+
+                if (a.StartsWith("code editor"))
+                {
                     string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:" + a.Substring(5)).ToString();
                     Console.WriteLine("Done!");
                 }

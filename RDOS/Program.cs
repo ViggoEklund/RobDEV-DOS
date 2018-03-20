@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RDOS
+namespace RDOS.hardware
 {
     class Program
     {

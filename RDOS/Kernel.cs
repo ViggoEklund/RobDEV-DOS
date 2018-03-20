@@ -58,8 +58,10 @@ namespace RobDEV_DOS
 
                 if (a.StartsWith("code editor"))
                 {
-                    string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:" + a.Substring(5)).ToString();
-                    Console.WriteLine("Done!");
+                    Console.Clear();
+                    AIC_Framework.AConsole.Menu.Reset();
+                    RDOS.CodeEditor.Run();
+                    
                 }
 
                 if (input == "files")

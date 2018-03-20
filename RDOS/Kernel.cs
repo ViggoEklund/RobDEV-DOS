@@ -56,22 +56,31 @@ namespace RobDEV_DOS
                     Console.WriteLine("Done!");
                 }
 
-                if (a.StartsWith("code editor"))
+                if (a.StartsWith("code editor "))
                 {
                     Console.Clear();
                     AIC_Framework.AConsole.Menu.Reset();
-                    RDOS.CodeEditor.Run();
+                    RDOS.CodeEditor.Run(a.Substring(13));
                     
+                }
+
+                if (input == "gui")
+                {
+                    Console.Clear();
+                 
+                    RDOS.gui.gl.gll();
                 }
 
                 if (input == "files")
                 {
-                    Console.Write(Sys.FileSystem.VFS.VFSManager.GetDirectory(@"0:\").mFullPath);
+                    string Files = Sys.FileSystem.VFS.VFSManager.InternalGetFileDirectoryNames("0:\\", "0:\\", "", true, true, System.IO.SearchOption.AllDirectories).ToString();
+                    Console.WriteLine(Files);
                 }
-                if (input == "speaker")
+                if (a.StartsWith("speaker "))
                 {
+                    uint x = UInt32.Parse(a.Substring(9));
                     AIC.Core.PCSpeaker.sound_on();
-                    AIC.Core.PCSpeaker.Beep(0x0001);
+                    AIC.Core.PCSpeaker.Beep(x);
                     AIC.Core.PCSpeaker.sound_off();
                 }
                 if (input == "about")

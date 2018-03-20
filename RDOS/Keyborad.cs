@@ -14,10 +14,6 @@ namespace RDOS.hardware
                 keyboard = new PS2Keyboard();
             }
 
-            public String readKey()
-            {
-
-            }
 
     }
 }

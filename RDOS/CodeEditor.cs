@@ -10,7 +10,7 @@ namespace RDOS
 {
     class CodeEditor
     {
-        public static void Run()
+        public static void Run(string file)
         {
 
             Console.WriteLine("Save| Load | Exit");

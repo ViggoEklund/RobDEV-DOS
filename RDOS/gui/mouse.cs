@@ -26,7 +26,13 @@ namespace RDOS.gui
 
         public static bool leftclick(int x, int y)
         {
-            
+            if (mouse.Buttons == Cosmos.HAL.Mouse.MouseState.Left)
+            {
+                return true;
+            }
+            else
+                return false;
         }
+    
     }
 }

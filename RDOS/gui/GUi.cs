@@ -8,13 +8,16 @@ namespace RDOS
 {
     class GUi
     {
-
+        
        static Canvas canvas;
         public static void init(int wich)
         {
            
             canvas = FullScreenCanvas.GetFullScreenCanvas();
             canvas.Clear(Color.Black);
+        }
+        public static void init2()
+        {
             canvas.Mode = new Mode(800, 600, ColorDepth.ColorDepth32);
         }
         public static void DrawCircle(int x,int y, int z ,int c)
@@ -149,6 +152,15 @@ namespace RDOS
                 canvas.DrawSquare(pen1, point, size);
                 
             }
+        }
+
+
+        public static void MouseINIT()
+        {
+            
+            int x = RDOS.gui.Mousedriver.x();
+            int y = RDOS.gui.Mousedriver.y();
+            GUi.DrawSquare(x, y, 6, RDOS.gui.color.white());
         }
     }
     

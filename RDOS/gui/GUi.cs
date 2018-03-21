@@ -1,4 +1,5 @@
 ﻿using Cosmos.HAL;
+using Cosmos.System.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,83 +8,56 @@ namespace RDOS
 {
     class GUi
     {
-        protected static VGAScreen screen = new VGAScreen();
-        private static int width, height;
-        private static byte[] buffer;
-        private static byte[] screenBuffer;
 
-        public static void Init()
+       static Canvas canvas;
+        public static void init(int wich)
         {
-
+           
+            canvas = FullScreenCanvas.GetFullScreenCanvas();
+            canvas.Clear(Color.Black);
+            canvas.Mode = new Mode(800, 600, ColorDepth.ColorDepth32);
         }
-
-        public static void SetPixel(int x, int y, int c)
+        public static void darwcircel(int x,int y, int z ,int c)
         {
-            buffer[y * width + x] = (byte)c;
-        }
-
-        public static byte GetPixel(int x, int y)
-        {
-            return (byte)screen.GetPixel320x200x8((uint)x, (uint)y);
-        }
-
-        public static void Clear()
-        {
-            Clear(0);
-        }
-
-        public static void Clear(int c)
-        {
-            screen.Clear(c);
-        }
-
-        public static int GetWidth()
-        {
-            return width;
-        }
-
-        public static int GetHeight()
-        {
-            return height;
-        }
-
-        public static void SetPixelRaw(int x, int y, int c)
-        {
-            screen.SetPixel320x200x8((uint)x, (uint)y, (uint)c);
-
-        }
-
-        public static void ReDraw() 
-        {
-            int c = 0;
-            byte cl;
-            byte dl;
-
-            for (int y = 0; y < height; y++)
+            Pen pen1 = new Pen(Color.Black);
+            Pen pen2 = new Pen(Color.Red);
+            Pen pen3 = new Pen(Color.Green);
+            Pen pen4 = new Pen(Color.Blue);
+            Pen pen5 = new Pen(Color.Yellow);
+            Pen pen6 = new Pen(Color.Cyan);
+            Pen pen7 = new Pen(Color.Purple);
+            Pen pen8 = new Pen(Color.White);
+            if (c == 1)
             {
-                for (int x = 0; x < width; x++)
-                {
-                    cl = screenBuffer[c]; 
-                    dl = buffer[c];
-                    if (cl > dl || cl < dl) 
-                    {
-                        screen.SetPixel320x200x8((uint)x, (uint)y, buffer[c]);
-                        screenBuffer[c] = buffer[c];
-                    }
-                    buffer[c] = 0;
-                    c++;
-                }
+                canvas.DrawCircle(pen1, x, y, z);
             }
-        }
-
-        public static void DrawFilledRectangle(int x0, int y0, int x1, int y1, int color)
-        {
-            for (int i = 0; i < x1 - x0; i++)
+            if (c == 2)
             {
-                for (int h = 0; h < y1 - y0; h++)
-                {
-                    SetPixel((x0 + i), (y0 + h), color);
-                }
+                canvas.DrawCircle(pen2, x, y, z);
+            }
+            if (c == 3)
+            {
+                canvas.DrawCircle(pen3, x, y, z);
+            }
+            if (c == 4)
+            {
+                canvas.DrawCircle(pen4, x, y, z);
+            }
+            if (c == 5)
+            {
+                canvas.DrawCircle(pen5, x, y, z);
+            }
+            if (c == 6)
+            {
+                canvas.DrawCircle(pen6, x, y, z);
+            }
+            if (c == 7)
+            {
+                canvas.DrawCircle(pen7, x, y, z);
+            }
+            if (c == 8)
+            {
+                canvas.DrawCircle(pen8, x, y, z);
             }
         }
     }

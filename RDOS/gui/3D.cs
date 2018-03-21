@@ -4,10 +4,7 @@ using System.Text;
 
 namespace RDOS.gui
 {
-    class gl
+    class _3D
     {
-        public static void gll(){
-
-       }
     }
 }

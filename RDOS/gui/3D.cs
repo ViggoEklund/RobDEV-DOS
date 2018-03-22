@@ -6,5 +6,12 @@ namespace RDOS.gui
 {
     class _3D
     {
+        //
+        public static void draw(int wich)
+        {
+            if (wich == 1)
+            {
+            }
+        }
     }
 }

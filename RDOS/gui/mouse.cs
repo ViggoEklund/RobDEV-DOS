@@ -11,7 +11,7 @@ namespace RDOS.gui
 
         public static void init()
         {
-            mouse.Initialize(800, 60);
+            mouse.Initialize(720, 480);
         }
 
         public static int x()

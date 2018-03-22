@@ -15,7 +15,7 @@ namespace RDOS.gui
                 GUi.init2();
                 boot = false;
             }
-            GUi.init(3);
+            GUi.DrawSquare(10, 10, 99, 3);
             GUi.MouseINIT();
        }
     }

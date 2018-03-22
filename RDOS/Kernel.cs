@@ -15,12 +15,12 @@ namespace RobDEV_DOS
         {
             var fs = new Sys.FileSystem.CosmosVFS();
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+            Console.Clear();
             Console.WriteLine("RDOS Type help for commands!");
         }
 
         protected override void Run()
         {
-
             Console.Write("0: ");
             var input = Console.ReadLine();
             Console.Write("Text typed: ");
@@ -44,7 +44,7 @@ namespace RobDEV_DOS
                     Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(8), true);
                     Console.WriteLine("Done!");
                 }
-                if (a.StartsWith("delfile "))
+                if (a.StartsWith("delfile"))
                 {
                     Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(9), true);
                     Console.WriteLine("Done!");
@@ -59,10 +59,10 @@ namespace RobDEV_DOS
 
                 if (a.StartsWith("mkprogram "))
                 {
-                    
-                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\program.txtaaa");
+
+                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\program.txt");
                     StreamWriter file = new StreamWriter("0:\\program.txt");
-                    file.WriteLine(a.Substring(11));
+                    file.WriteLine("print hello world");
                     file.Close();
                 }
                 if (a.StartsWith("print "))
@@ -76,7 +76,7 @@ namespace RobDEV_DOS
                     ran.Next(0, 999999999);
                     string num = ran.ToString();
                     Console.WriteLine(num);
-                  
+
                 }
 
 
@@ -87,13 +87,13 @@ namespace RobDEV_DOS
                     Console.Clear();
                     AIC_Framework.AConsole.Menu.Reset();
                     RDOS.CodeEditor.Run(a.Substring(13));
-                    
+
                 }
 
                 if (input == "gui")
                 {
                     Console.Clear();
-                 
+
                     RDOS.gui.gl.gll();
                 }
 
@@ -466,6 +466,8 @@ namespace RobDEV_DOS
                     RDOS.RBasic.loop();
                 }
 
+               
+
 
 
                 if (input == "help")
@@ -482,11 +484,20 @@ namespace RobDEV_DOS
                     Console.WriteLine("shutdown shutdown the computer");
                     Console.WriteLine("shutdown shutdown the computer");
                     Console.WriteLine("rdbasic RobDEVBasic a simple programming lanuge");
+                    Console.WriteLine("clear to clear the console");
+                    Console.WriteLine("gui  to boot gui");
 
 
 
                 }
             }
+        
+
+          
+            void start()
+{
+                Console.WriteLine("Error command not found!");
+            } 
 
 
         }

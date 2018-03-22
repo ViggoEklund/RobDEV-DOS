@@ -18,7 +18,8 @@ namespace RDOS
         }
         public static void init2()
         {
-            canvas.Mode = new Mode(800, 600, ColorDepth.ColorDepth32);
+
+
         }
         public static void DrawCircle(int x,int y, int z ,int c)
         {
@@ -160,7 +161,7 @@ namespace RDOS
             
             int x = RDOS.gui.Mousedriver.x();
             int y = RDOS.gui.Mousedriver.y();
-            GUi.DrawSquare(x, y, 6, RDOS.gui.color.white());
+            GUi.DrawSquare(x, y, 6, 8);
         }
     }
     

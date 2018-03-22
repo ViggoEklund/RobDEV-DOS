@@ -53,17 +53,14 @@ namespace RobDEV_DOS
 
                 if (a.StartsWith("run "))
                 {
-                    string program = Sys.FileSystem.VFS.VFSManager.GetFile("0:\\program.txt").ToString();
+                    string program = System.IO.File.ReadAllText(@"0:\program.prg");
                     RDOS.hardware.Program.Load(program);
                 }
 
                 if (a.StartsWith("mkprogram "))
                 {
-
-                    Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\program.txt");
-                    StreamWriter file = new StreamWriter("0:\\program.txt");
-                    file.WriteLine("print hello world");
-                    file.Close();
+                    string[] text = { a.Substring(10) };
+                    RDOS.VFS.write(@"0:\program.prg", text);
                 }
                 if (a.StartsWith("print "))
                 {
@@ -99,8 +96,10 @@ namespace RobDEV_DOS
 
                 if (input == "files")
                 {
-                    string Files = Sys.FileSystem.VFS.VFSManager.InternalGetFileDirectoryNames("0:\\", "0:\\", "", true, true, System.IO.SearchOption.AllDirectories).ToString();
-                    Console.WriteLine(Files);
+                    string[] test1 = { "txt" };
+                    string[] test2 = { "" };
+
+                    RDOS.VFS.files("0:", test1, test2);
                 }
                 if (a.StartsWith("speaker"))
                 {

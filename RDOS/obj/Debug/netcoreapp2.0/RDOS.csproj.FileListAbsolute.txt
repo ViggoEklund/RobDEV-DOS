@@ -1,16 +1,16 @@
 C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\RDOS.deps.json
 C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\RDOS.dll
 C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\RDOS.pdb
+C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC Framework.dll
 C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Core.dll
 C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Hardware.dll
-C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.csprojResolveAssemblyReference.cache
+C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC Framework.pdb
+C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Core.pdb
+C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Hardware.pdb
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.csproj.CoreCompileInputs.cache
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.AssemblyInfoInputs.cache
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.AssemblyInfo.cs
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.csproj.CopyComplete
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.dll
 C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.pdb
-C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC Framework.dll
-C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC Framework.pdb
-C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Core.pdb
-C:\Users\viggo\source\repos\RDOS\RDOS\bin\Debug\netcoreapp2.0\AIC.Hardware.pdb
+C:\Users\viggo\source\repos\RDOS\RDOS\obj\Debug\netcoreapp2.0\RDOS.csprojResolveAssemblyReference.cache

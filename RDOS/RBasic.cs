@@ -15,7 +15,7 @@ namespace RDOS
             {
                 if (a.StartsWith("print "))
                 {
-                    Console.Write(a.Substring(6));
+                    Console.Write(a.Substring(3));
                 }
 
                 if (a.StartsWith("BSOD"))

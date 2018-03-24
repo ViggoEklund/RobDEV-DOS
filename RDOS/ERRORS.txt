@@ -1,0 +1,2 @@
+﻿RD 0001 cannot eneter test mode
+RD 0002 unkonwn error happend 

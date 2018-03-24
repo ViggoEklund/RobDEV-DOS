@@ -4,50 +4,99 @@ using System.Text;
 using Sys = Cosmos.System;
 using System.IO;
 using Cosmos.System.Graphics;
+using Cosmos.HAL;
 
 namespace RobDEV_DOS
 {
     public class Kernel : Sys.Kernel
     {
+        public static Cosmos.HAL.Mouse m = new Cosmos.HAL.Mouse();
         Canvas canvas;
         string VersionNum = "0.1";
         string Versiont = "A";
+        bool gui = false;
         protected override void BeforeRun()
         {
             
             var fs = new Sys.FileSystem.CosmosVFS();
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
-                Console.Clear();
-                Console.WriteLine("RDOS Type help for commands!");
+            m.Initialize(320, 200);
+            Console.Clear();
+            Console.WriteLine("RDOS Type help for commands!");
+            if (gui == true)
+            {
 
+                // Create new instance of FullScreenCanvas, using default graphics mode
+                canvas = FullScreenCanvas.GetFullScreenCanvas();    // canvas = GetFullScreenCanvas(start);
+                RDOS.gui.Mousedriver.init();
+
+                /* Clear the Screen with the color 'Blue' */
+                canvas.Clear(Color.DarkCyan);
+            }
+            
+            
+        }
+
+
+
+        public static bool Click(int x, int y)
+        {
+            if (m.Buttons == Mouse.MouseState.Left)
+            {
+                if (x == m.X)
+                {
+                    if (y == m.Y)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
         }
 
         protected override void Run()
         {
-            #region cmd
+            if (gui == true)
+            {
+                if (Click(1, 1))
+                {
+                    mDebugger.Send("1x 1y clicked!");
+                }
+                Pen pen = new Pen(Color.White);
+                canvas.Mode = new Mode(320, 200, ColorDepth.ColorDepth32);
+                canvas.DrawFilledRectangle(pen, m.X, m.Y, 20, 20);
+                canvas.Clear(Color.DarkCyan);
+            }
+            if (gui == false)
+            {
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("# 0: ");
                 var input = Console.ReadLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.Write("Text typed: ");
+                Console.Write("Text typed: ");
                 Console.WriteLine(input);
-            Console.ForegroundColor = ConsoleColor.White;
-            //File
-            foreach (string a in input.Split('\n'))
+                Console.ForegroundColor = ConsoleColor.White;
+                //File
+                foreach (string a in input.Split('\n'))
                 {
-                   if (a.StartsWith("image"))
-                {
-                    string image = System.IO.File.ReadAllText(@"0:\image.img");
-                    RDOS.RDos.excutable.image.load(image);
-                }
-                if (a.StartsWith("mkimage "))
-                {
-                    string[] text = { a.Substring(7) };
-                    RDOS.VFS.write(@"0:\image.img", text);
-                }
-                if (a.StartsWith("mkdir "))
+                    if (a.StartsWith("image"))
+                    {
+                        string image = System.IO.File.ReadAllText(@"0:\image.img");
+                        RDOS.OS.excutable.image.load(image);
+                    }
+                    if (a.StartsWith("mkimage "))
+                    {
+                        string[] text = { a.Substring(8) };
+                        RDOS.VFS.write(@"0:\image.img", text);
+                    }
+                    if (a.StartsWith("mkdir "))
                     {
                         Sys.FileSystem.VFS.VFSManager.CreateDirectory("0:\\" + a.Substring(6));
                         Console.WriteLine("Done!");
@@ -73,7 +122,7 @@ namespace RobDEV_DOS
                     if (a.StartsWith("run"))
                     {
                         string program = System.IO.File.ReadAllText(@"0:\program.prg");
-                        RDOS.hardware.Program.Load(program);
+                        RDOS.OS.hardware.Program.Load(program);
                     }
 
                     if (a.StartsWith("mkprogram "))
@@ -100,7 +149,7 @@ namespace RobDEV_DOS
 
                     if (a.StartsWith("code editor "))
                     {
-                    RDOS.RDos.program.CodeEditor.ProgramCD.init(a.Substring(12));
+                        RDOS.OS.program.CodeEditor.ProgramCD.init(a.Substring(12));
 
                     }
 
@@ -120,319 +169,11 @@ namespace RobDEV_DOS
                     }
 
 
+
                     if (a.StartsWith("speaker"))
                     {
                         AIC.Core.PCSpeaker.sound_on();
                         AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x002);
                         AIC.Core.PCSpeaker.sound_off();
 
                     }
@@ -472,9 +213,13 @@ namespace RobDEV_DOS
                         Console.WriteLine("date:" + date);
 
                     }
+
+
+
                     if (input == "test")
                     {
-                    RDOS.test.tast();
+                        AIC_Framework.Bluescreen.Init("RD 0001", "Cannot enter test mode", true);
+                        //RDOS.testkeyboard.test();
                     }
 
                     if (input == "rdbasic")
@@ -499,26 +244,20 @@ namespace RobDEV_DOS
                         Console.WriteLine("time shows the time and date");
                         Console.WriteLine("reboot  reboots the computer");
                         Console.WriteLine("shutdown shutdown the computer");
-                        Console.WriteLine("shutdown shutdown the computer");
                         Console.WriteLine("rdbasic RobDEVBasic a simple programming lanuge");
                         Console.WriteLine("clear to clear the console");
                         Console.WriteLine("gui  to boot gui");
+                        Console.WriteLine("mkprogram code here to make a program :)");
+                        Console.WriteLine("run to run the program");
+                        Console.WriteLine("mkimage to make a image");
+                        Console.WriteLine("image to show image");
 
 
 
                     }
                 }
 
-
-
-                void start()
-                {
-                    Console.WriteLine("Error command not found!");
-                }
-
-            
-            
-            #endregion
+            }
 
         }
 

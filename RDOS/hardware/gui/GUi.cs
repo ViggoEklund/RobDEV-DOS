@@ -12,9 +12,7 @@ namespace RDOS
        static Canvas canvas;
         public static void init(int wich)
         {
-           
-            canvas = FullScreenCanvas.GetFullScreenCanvas();
-            canvas.Clear(Color.Black);
+
         }
         public static void init2()
         {
@@ -158,10 +156,9 @@ namespace RDOS
 
         public static void MouseINIT()
         {
-            
-            int x = RDOS.gui.Mousedriver.x();
-            int y = RDOS.gui.Mousedriver.y();
-            GUi.DrawSquare(x, y, 6, 8);
+            Pen pen = new Pen(Color.White);
+            canvas.DrawPoint(pen, RDOS.gui.Mousedriver.m.X, RDOS.gui.Mousedriver.m.Y);
+
         }
     }
     

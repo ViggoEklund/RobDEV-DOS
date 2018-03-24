@@ -7,15 +7,10 @@ namespace RDOS.gui
 {
     public class gl
     {
+        static Canvas canvas;
         static bool boot = true;
         public static void gll(){
-            if (boot == true)
-            {
-                GUi.init2();
-                boot = false;
-            }
-            GUi.DrawSquare(10, 10, 99, 3);
-            GUi.MouseINIT();
+            RDOS.gui.gl.gll();
        }
     }
 }

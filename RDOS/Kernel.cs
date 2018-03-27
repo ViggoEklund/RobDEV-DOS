@@ -23,55 +23,16 @@ namespace RobDEV_DOS
             m.Initialize(320, 200);
             Console.Clear();
             Console.WriteLine("RDOS Type help for commands!");
-            if (gui == true)
-            {
-
-                // Create new instance of FullScreenCanvas, using default graphics mode
-                canvas = FullScreenCanvas.GetFullScreenCanvas();    // canvas = GetFullScreenCanvas(start);
-                RDOS.gui.Mousedriver.init();
-
-                /* Clear the Screen with the color 'Blue' */
-                canvas.Clear(Color.DarkCyan);
-            }
             
             
         }
 
 
 
-        public static bool Click(int x, int y)
-        {
-            if (m.Buttons == Mouse.MouseState.Left)
-            {
-                if (x == m.X)
-                {
-                    if (y == m.Y)
-                    {
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-                else
-                    return false;
-            }
-            else
-                return false;
-        }
+      
 
         protected override void Run()
         {
-            if (gui == true)
-            {
-                if (Click(1, 1))
-                {
-                    mDebugger.Send("1x 1y clicked!");
-                }
-                Pen pen = new Pen(Color.White);
-                canvas.Mode = new Mode(320, 200, ColorDepth.ColorDepth32);
-                canvas.DrawFilledRectangle(pen, m.X, m.Y, 20, 20);
-                canvas.Clear(Color.DarkCyan);
-            }
             if (gui == false)
             {
 

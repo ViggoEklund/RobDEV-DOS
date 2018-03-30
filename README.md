@@ -1,4 +1,5 @@
 RobDev OS
+you need latest devkit of cosmos to compile!
 
 Has:
 file system

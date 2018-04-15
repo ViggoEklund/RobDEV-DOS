@@ -2,16 +2,16 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "Cosmos.Build/2018.3.20": {
+      "Cosmos.Build/2018.4.14": {
         "type": "package",
         "build": {
           "build/Cosmos.Build.targets": {}
         }
       },
-      "Cosmos.Common/2018.3.20": {
+      "Cosmos.Common/2018.4.14": {
         "type": "package",
         "dependencies": {
-          "Cosmos.Debug.Kernel": "2018.3.20"
+          "Cosmos.Debug.Kernel": "2018.4.14"
         },
         "compile": {
           "lib/netstandard2.0/Cosmos.Common.dll": {}
@@ -20,11 +20,11 @@
           "lib/netstandard2.0/Cosmos.Common.dll": {}
         }
       },
-      "Cosmos.Core/2018.3.20": {
+      "Cosmos.Core/2018.4.14": {
         "type": "package",
         "dependencies": {
-          "Cosmos.Debug.Kernel": "2018.3.20",
-          "IL2CPU.API": "2018.3.20"
+          "Cosmos.Debug.Kernel": "2018.4.14",
+          "IL2CPU.API": "2018.4.14"
         },
         "compile": {
           "lib/netstandard2.0/Cosmos.Core.dll": {}
@@ -33,7 +33,7 @@
           "lib/netstandard2.0/Cosmos.Core.dll": {}
         }
       },
-      "Cosmos.Debug.Kernel/2018.3.20": {
+      "Cosmos.Debug.Kernel/2018.4.14": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Cosmos.Debug.Kernel.dll": {}
@@ -42,13 +42,13 @@
           "lib/netstandard2.0/Cosmos.Debug.Kernel.dll": {}
         }
       },
-      "Cosmos.HAL2/2018.3.20": {
+      "Cosmos.HAL2/2018.4.14": {
         "type": "package",
         "dependencies": {
-          "Cosmos.Common": "2018.3.20",
-          "Cosmos.Core": "2018.3.20",
-          "Cosmos.Debug.Kernel": "2018.3.20",
-          "IL2CPU.API": "2018.3.20"
+          "Cosmos.Common": "2018.4.14",
+          "Cosmos.Core": "2018.4.14",
+          "Cosmos.Debug.Kernel": "2018.4.14",
+          "IL2CPU.API": "2018.4.14"
         },
         "compile": {
           "lib/netstandard2.0/Cosmos.HAL2.dll": {}
@@ -57,13 +57,13 @@
           "lib/netstandard2.0/Cosmos.HAL2.dll": {}
         }
       },
-      "Cosmos.System2/2018.3.20": {
+      "Cosmos.System2/2018.4.14": {
         "type": "package",
         "dependencies": {
-          "Cosmos.Common": "2018.3.20",
-          "Cosmos.Debug.Kernel": "2018.3.20",
-          "Cosmos.HAL2": "2018.3.20",
-          "IL2CPU.API": "2018.3.20"
+          "Cosmos.Common": "2018.4.14",
+          "Cosmos.Debug.Kernel": "2018.4.14",
+          "Cosmos.HAL2": "2018.4.14",
+          "IL2CPU.API": "2018.4.14"
         },
         "compile": {
           "lib/netstandard2.0/Cosmos.System2.dll": {}
@@ -72,7 +72,7 @@
           "lib/netstandard2.0/Cosmos.System2.dll": {}
         }
       },
-      "IL2CPU.API/2018.3.20": {
+      "IL2CPU.API/2018.4.14": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/IL2CPU.API.dll": {}
@@ -279,88 +279,92 @@
     }
   },
   "libraries": {
-    "Cosmos.Build/2018.3.20": {
-      "sha512": "qjqJdYdmjhxdOUxgfTd2VXr7ZloZ8gBzFV2EpBVbuESgpeadsz2NqP0hunkyMD+nlWBxRb9LowerflY3GV3Eog==",
+    "Cosmos.Build/2018.4.14": {
+      "sha512": "7NkbnG7j8Y5F0zczxWj6tmtOmcRd9+hQ465e7iou2gbzJZpTv1XlvuMAElfruP79m8PtEAfS0JKo5tMeGecevA==",
       "type": "package",
-      "path": "cosmos.build/2018.3.20",
+      "path": "cosmos.build/2018.4.14",
       "files": [
         "build/Cosmos.Build.targets",
-        "cosmos.build.2018.3.20.nupkg.sha512",
+        "cosmos.build.2018.4.14.nupkg.sha512",
         "cosmos.build.nuspec",
+        "runtime.json",
         "tools/Cosmos.Build.Tasks.dll",
-        "tools/cygwin/GPL Readme.txt",
-        "tools/cygwin/cygiconv-2.dll",
-        "tools/cygwin/cygintl-3.dll",
-        "tools/cygwin/cygwin1.dll",
-        "tools/cygwin/ld.exe",
-        "tools/cygwin/objdump.exe",
-        "tools/isolinux/isolinux.bin",
-        "tools/isolinux/ldlinux.c32",
-        "tools/isolinux/libcom32.c32",
-        "tools/isolinux/mboot.c32",
-        "tools/mkisofs/mkisofs.exe",
-        "tools/nasm/LICENSE.txt",
-        "tools/nasm/nasm.exe",
-        "tools/nasm/ndisasm.exe",
-        "tools/nasm/version.txt"
+        "tools/cygwin/win/GPL Readme.txt",
+        "tools/cygwin/win/cygiconv-2.dll",
+        "tools/cygwin/win/cygintl-3.dll",
+        "tools/cygwin/win/cygwin1.dll",
+        "tools/cygwin/win/ld.exe",
+        "tools/cygwin/win/objdump.exe",
+        "tools/mkisofs/win/mkisofs.exe",
+        "tools/nasm/win/LICENSE.txt",
+        "tools/nasm/win/nasm.exe",
+        "tools/nasm/win/ndisasm.exe",
+        "tools/nasm/win/version.txt",
+        "tools/syslinux/bios/com32/elflink/ldlinux/ldlinux.c32",
+        "tools/syslinux/bios/com32/lib/libcom32.c32",
+        "tools/syslinux/bios/com32/mboot/mboot.c32",
+        "tools/syslinux/bios/core/isolinux.bin",
+        "tools/syslinux/bios/core/pxelinux.0",
+        "tools/syslinux/bios/core/pxelinux.bin",
+        "tools/syslinux/win/syslinux.exe"
       ]
     },
-    "Cosmos.Common/2018.3.20": {
-      "sha512": "2j/L0kpVY8O72nrZG2htQM6MN3sHVJ49bINTQ2VpdIEYrjyPBj+bWtbIseRyL1ktVWHZKRWSLXCTMTmNrqJCuw==",
+    "Cosmos.Common/2018.4.14": {
+      "sha512": "0nx/nKULgilmHNlTtUSX7BbrPUYA/4oA+L/w04THrTRDX44+rHDOkQ7IBfCHxCIlIrqLUrgnI2r7Q/UBO2uIKw==",
       "type": "package",
-      "path": "cosmos.common/2018.3.20",
+      "path": "cosmos.common/2018.4.14",
       "files": [
-        "cosmos.common.2018.3.20.nupkg.sha512",
+        "cosmos.common.2018.4.14.nupkg.sha512",
         "cosmos.common.nuspec",
         "lib/netstandard2.0/Cosmos.Common.dll"
       ]
     },
-    "Cosmos.Core/2018.3.20": {
-      "sha512": "+q5amQJa5nXKrWou5Q26YV7T9OaIP9B9ep2XFhUhg/YG5b9y4EibVnrtwOSoYcG/NHev/Zncpv9HXzzfV2x/7Q==",
+    "Cosmos.Core/2018.4.14": {
+      "sha512": "2E7Mqt7G5bnZYxAA5nxoA+BfUqWO+gj4dyDqkFtJilbffnFQVodjstkDIQgXpDIpBXphekENVbZ7als/DOQlmQ==",
       "type": "package",
-      "path": "cosmos.core/2018.3.20",
+      "path": "cosmos.core/2018.4.14",
       "files": [
-        "cosmos.core.2018.3.20.nupkg.sha512",
+        "cosmos.core.2018.4.14.nupkg.sha512",
         "cosmos.core.nuspec",
         "lib/netstandard2.0/Cosmos.Core.dll"
       ]
     },
-    "Cosmos.Debug.Kernel/2018.3.20": {
-      "sha512": "4OtQlziNsXDapgubpmsz5g5NXurAlx0tdALoamGyvxuEVrmbDKw6MMI+nh/a+8fUKBWwDWN3v9bSZ1l5JE1oIg==",
+    "Cosmos.Debug.Kernel/2018.4.14": {
+      "sha512": "Dx3VJcKtVi8bvMADZhwRLJ78He54vbL2MgoffhBFxnCslJELSIOdTg14oyfDJBwJ6TerxUpST/WXE2m+UflkpA==",
       "type": "package",
-      "path": "cosmos.debug.kernel/2018.3.20",
+      "path": "cosmos.debug.kernel/2018.4.14",
       "files": [
-        "cosmos.debug.kernel.2018.3.20.nupkg.sha512",
+        "cosmos.debug.kernel.2018.4.14.nupkg.sha512",
         "cosmos.debug.kernel.nuspec",
         "lib/netstandard2.0/Cosmos.Debug.Kernel.dll"
       ]
     },
-    "Cosmos.HAL2/2018.3.20": {
-      "sha512": "N9qTsbpU6jro3jyDiW2JFGHLSquMKkMA+4BAiasztveKKpeOe9p/j44xpQp+KirV9p61VneQaw2oDAffs3k3wQ==",
+    "Cosmos.HAL2/2018.4.14": {
+      "sha512": "DHVcarj3Cz55/7WErap8WY4ZWtnVAmh8qe7O7FhLIjj8/0wxXyDf6PaB5VJ7xOll27iFx4l0YNws0ullvc1kXA==",
       "type": "package",
-      "path": "cosmos.hal2/2018.3.20",
+      "path": "cosmos.hal2/2018.4.14",
       "files": [
-        "cosmos.hal2.2018.3.20.nupkg.sha512",
+        "cosmos.hal2.2018.4.14.nupkg.sha512",
         "cosmos.hal2.nuspec",
         "lib/netstandard2.0/Cosmos.HAL2.dll"
       ]
     },
-    "Cosmos.System2/2018.3.20": {
-      "sha512": "ih6bQaNa+KVBV8k6JpVuW97kKCpF/ce8o+sd/2Yr1rNMc38iokZOmv+CzziuXpGz5nqitWkqQzVbYQEMlK5IPA==",
+    "Cosmos.System2/2018.4.14": {
+      "sha512": "hGMWtH2tqn+UfDoDy0Bgvn2EnOEx3zpEGiTfxYSZN1RHZ2+KcIn5U69y4wR2A1Jzae741bNnAbdL/P2v2fwvaQ==",
       "type": "package",
-      "path": "cosmos.system2/2018.3.20",
+      "path": "cosmos.system2/2018.4.14",
       "files": [
-        "cosmos.system2.2018.3.20.nupkg.sha512",
+        "cosmos.system2.2018.4.14.nupkg.sha512",
         "cosmos.system2.nuspec",
         "lib/netstandard2.0/Cosmos.System2.dll"
       ]
     },
-    "IL2CPU.API/2018.3.20": {
-      "sha512": "0I4gaH+eNqERKYiLi38EkRwJcu9nUEt/55CgmXrILUIi5assImcwSEo9RfE72PgEXuhLnwl/FUW3uTgwSS44fA==",
+    "IL2CPU.API/2018.4.14": {
+      "sha512": "cmEeJy+49hRIK0O7qHIbpavgufOpL+Eze6m3zt/ohpUN2FDVlesKN1dFang77UdKI2esOhmlt6J0j0+ECjiBqA==",
       "type": "package",
-      "path": "il2cpu.api/2018.3.20",
+      "path": "il2cpu.api/2018.4.14",
       "files": [
-        "il2cpu.api.2018.3.20.nupkg.sha512",
+        "il2cpu.api.2018.4.14.nupkg.sha512",
         "il2cpu.api.nuspec",
         "lib/netstandard2.0/IL2CPU.API.dll"
       ]

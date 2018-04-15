@@ -18,14 +18,9 @@ namespace RDOS
                     Console.WriteLine(a.Substring(6));
                 }
 
-                if (a.StartsWith("BSOD"))
-                {
-                    AIC_Framework.Bluescreen.Init("Error", "An unkowned error happed!", true);
-                }
-
                 if (a.StartsWith("exit"))
                 {
-                    AIC_Framework.userACPI.Shutdown();
+                    Cosmos.HAL.Power.ACPIShutdown();
                 }
                 if (a.StartsWith("mkdir "))
                 {

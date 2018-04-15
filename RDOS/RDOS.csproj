@@ -88,20 +88,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="AIC Framework">
-        <HintPath>..\..\..\..\Desktop\AIC-Framework-master\AIC Framework\obj\Debug\netstandard2.0\AIC Framework.dll</HintPath>
-      </Reference>
-      <Reference Include="AIC.Core">
-        <HintPath>..\..\..\..\Desktop\AIC-Framework-master\AIC.Core\bin\Debug\netstandard2.0\AIC.Core.dll</HintPath>
-      </Reference>
-      <Reference Include="AIC.Hardware">
-        <HintPath>..\..\..\..\Desktop\AIC-Framework-master\AIC.Hardware\bin\Debug\netstandard2.0\AIC.Hardware.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Update="AIC.Core %282%29">
         <HintPath>..\..\..\..\Downloads\AIC.Core (2).dll</HintPath>
+      </Reference>
+      <Reference Update="AIC.Core %283%29">
+        <HintPath>..\..\..\..\Desktop\CGE\AIC.Core (3).dll</HintPath>
       </Reference>
       <Reference Update="AIC.Framework %286%29">
         <HintPath>..\..\..\..\Downloads\AIC.Framework (6).dll</HintPath>
@@ -109,8 +100,14 @@
       <Reference Update="AIC.Framework %287%29">
         <HintPath>..\..\..\..\Downloads\AIC.Framework (7).dll</HintPath>
       </Reference>
+      <Reference Update="AIC.Framework %288%29">
+        <HintPath>..\..\..\..\Desktop\CGE\AIC.Framework (8).dll</HintPath>
+      </Reference>
       <Reference Update="AIC.Hardware %282%29">
         <HintPath>..\..\..\..\Downloads\AIC.Hardware (2).dll</HintPath>
+      </Reference>
+      <Reference Update="AIC.Hardware %283%29">
+        <HintPath>..\..\..\..\Desktop\CGE\AIC.Hardware (3).dll</HintPath>
       </Reference>
     </ItemGroup>
 

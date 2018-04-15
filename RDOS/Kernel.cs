@@ -5,37 +5,181 @@ using Sys = Cosmos.System;
 using System.IO;
 using Cosmos.System.Graphics;
 using Cosmos.HAL;
+using Cosmos.System.ExtendedASCII;
+using RDOS;
 
 namespace RobDEV_DOS
 {
     public class Kernel : Sys.Kernel
     {
+        public static Cosmos.HAL.VGAScreen VScreen = new Cosmos.HAL.VGAScreen();
+       
+        public static byte[] SBuffer = new byte[64000];
         public static Cosmos.HAL.Mouse m = new Cosmos.HAL.Mouse();
+        private static Sys.FileSystem.CosmosVFS FS;
+        public static string file;
         Canvas canvas;
-        string VersionNum = "0.1";
+        string VersionNum = "0.2.1";
         string Versiont = "A";
+        string Open = "";
         bool gui = false;
+        string logo = @"  ████████╗ █████████╗  ████████╗   ████████
+ ██╔═════██╗██║     ██╗██║     ██╗██
+ ██║     ██╝██║     ██║██║     ██║██╔════╗
+ ████████║  ██║     ██║██║     ██║  ██████╗
+ ██╔═════██╗██║     ██║██║     ██║        ██╗
+ ██║     ██║██║     ██║██║     ██║   ╔════██║
+ ██║     ██║█████████╔╝╚████████╔╝████████╔═╝
+ ╚═╝     ╚═╝╚════════╝  ╚═══════╝ ╚═══════╝  ";
         protected override void BeforeRun()
         {
             
-            var fs = new Sys.FileSystem.CosmosVFS();
-            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+            FS = new Sys.FileSystem.CosmosVFS(); Sys.FileSystem.VFS.VFSManager.RegisterVFS(FS); FS.Initialize();
             m.Initialize(320, 200);
             Console.Clear();
-            Console.WriteLine("RDOS Type help for commands!");
-            
-            
+            Encoding.RegisterProvider(CosmosEncodingProvider.Instance);
+            Console.InputEncoding = Encoding.GetEncoding(437);
+            Console.OutputEncoding = Encoding.GetEncoding(437);
+            Console.WriteLine(logo);
+            Console.WriteLine("Type help for commands!");
+            origRow = Console.CursorTop;
+            origCol = Console.CursorLeft;
+            gui = true;
+            if (gui == true)
+            {
+                Console.WriteLine("Vga Driver Booting");
+                VScreen.SetGraphicsMode(Cosmos.HAL.VGAScreen.ScreenSize.Size320x200, Cosmos.HAL.VGAScreen.ColorDepth.BitDepth8);
+                VScreen.Clear(0);
+                Console.WriteLine("Vga Driver Booted");
+            }
+        }
+
+        public static void SetPixel(int x, int y, int color)
+        {
+            SBuffer[(y * 320) + x] = (byte)color;
+        }
+
+        public static void ReDraw()
+        {
+            // VScreen.Clear(0);
+
+            int c = 0;
+
+            for (int y = 0; y < 200; y++)
+            {
+                for (int x = 0; x < 320; x++)
+                {
+                    uint cl = VScreen.GetPixel320x200x8((uint)x, (uint)y);
+                    if (cl != (uint)SBuffer[c])
+                    {
+                        VScreen.SetPixel320x200x8((uint)x, (uint)y, SBuffer[c]);
+                    }
+                    c++;
+                }
+            }
+            for (int i = 0; i < 64000; i++)
+            {
+                SBuffer[i] = 0;
+            }
+        }
+
+        public static void DrawFilledRectangle(uint x0, uint y0, int Width, int Height, int color)
+        {
+            for (uint i = 0; i < Width; i++)
+            {
+                for (uint h = 0; h < Height; h++)
+                {
+                    SetPixel((int)(x0 + i), (int)(y0 + h), color);
+                }
+            }
+        }
+
+        public static void drawm()
+        {
+            SetPixel(m.X, m.Y, 40);
+            SetPixel(m.X + 1, m.Y, 40);
+            SetPixel(m.X + 2, m.Y, 40);
+            SetPixel(m.X, m.Y + 1, 40);
+            SetPixel(m.X, m.Y + 2, 40);
+            SetPixel(m.X + 1, m.Y + 1, 40);
+            SetPixel(m.X + 2, m.Y + 2, 40);
+            SetPixel(m.X + 3, m.Y + 3, 40);
         }
 
 
+        public bool mousedown()
+        {
+            if (m.Buttons == Mouse.MouseState.Left)
+            {
+                return true;
+            }
+            else return false;
+        }
 
-      
+        public void DrawButton(int x0, int y0, int Width, int Height)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int h = 0; h < Height; h++)
+                {
+                    setpixel((int)(x0 + i), (int)(y0 + h), Color.Black);
+                }
+            }
+        }
+
+        public void Drawmouse(int Width, int Height)
+        {
+            int x0 = m.X;
+            int y0 = m.Y;
+            
+            for (int i = 0; i < Width; i++)
+            {
+                for (int h = 0; h < Height; h++)
+                {
+                    setpixel((int)(x0 + i), (int)(y0 + h), Color.White);
+                }
+            }
+        }
+        protected static int origRow;
+        protected static int origCol;
+
+        protected static void WriteAt(string s, int x, int y)
+        {
+            try
+            {
+                Console.SetCursorPosition(origCol + x, origRow + y);
+                Console.Write(s);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.Clear();
+                Console.WriteLine(e.Message);
+            }
+        }
+        public void mouse()
+        {
+           
+            WriteAt("#", m.X, m.Y);
+            mouse();
+        }
+
+        public void setpixel(int x, int y, Cosmos.System.Graphics.Color color)
+        {
+            Pen pen = new Pen(color);
+            canvas.DrawPoint(pen, x, y);
+        }
 
         protected override void Run()
         {
-            if (gui == false)
+            bool start = true;
+            if (gui == true)
             {
-
+                drawm();
+                ReDraw();
+            }
+            else if (gui == false)
+            {
+               
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("# 0: ");
                 var input = Console.ReadLine();
@@ -47,6 +191,14 @@ namespace RobDEV_DOS
                 //File
                 foreach (string a in input.Split('\n'))
                 {
+                    if (input == "gui")
+                    {
+                        canvas = FullScreenCanvas.GetFullScreenCanvas();
+                        canvas.Clear(Color.Blue);
+                        gui = true;
+                        
+
+                    }
                     if (a.StartsWith("image"))
                     {
                         string image = System.IO.File.ReadAllText(@"0:\image.img");
@@ -62,6 +214,20 @@ namespace RobDEV_DOS
                         Sys.FileSystem.VFS.VFSManager.CreateDirectory("0:\\" + a.Substring(6));
                         Console.WriteLine("Done!");
                     }
+                    if (a.StartsWith("read "))
+                    {
+                        string text = System.IO.File.ReadAllText(@"0:\" + a.Substring(5));
+                        Console.WriteLine(text);
+                    }
+                    if (a.StartsWith("edit "))
+                    {
+                        string[] text = { a.Substring(5) };
+                        RDOS.VFS.write("0:\\" + Open, text);
+                    }
+                    if (a.StartsWith("open "))
+                    {
+                        Open = a.Substring(5);
+                    }
                     if (a.StartsWith("mkfile "))
                     {
                         Sys.FileSystem.VFS.VFSManager.CreateFile("0:\\" + a.Substring(7));
@@ -70,26 +236,53 @@ namespace RobDEV_DOS
                     }
                     if (a.StartsWith("deldir "))
                     {
-                        Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(8), true);
+                        RDOS.VFS.DelDir("0:\\" + a.Substring(8));
                         Console.WriteLine("Done!");
                     }
                     if (a.StartsWith("delfile"))
                     {
-                        Sys.FileSystem.VFS.VFSManager.DeleteDirectory("0:\\" + a.Substring(9), true);
+                        RDOS.VFS.Delfile("0:\\" + a.Substring(9));
                         Console.WriteLine("Done!");
                     }
 
 
-                    if (a.StartsWith("run"))
+                    if (a.StartsWith("run "))
                     {
-                        string program = System.IO.File.ReadAllText(@"0:\program.prg");
-                        RDOS.OS.hardware.Program.Load(program);
+                        string program = System.IO.File.ReadAllText(@"0:\" + a.Substring(4));
+                        RDOS.OS.hardware.Program.load(program);
                     }
 
-                    if (a.StartsWith("mkprogram "))
+                    if (a.StartsWith("net -c"))
                     {
-                        string[] text = { a.Substring(10) };
-                        RDOS.VFS.write(@"0:\program.prg", text);
+                        var maca = new Cosmos.System.Network.UdpClient();
+                        maca.Connect(Sys.Network.IPv4.Address.Zero, 5000);
+                        Console.WriteLine(maca.ToString());
+                    }
+
+                    if (a.StartsWith("net -c"))
+                    {
+                        var maca = new Cosmos.System.Network.UdpClient();
+                        maca.Connect(Sys.Network.IPv4.Address.Zero, 5000);
+                        mDebugger.Send("Done");
+
+                    }
+                    if (a.StartsWith("net -s"))
+                    {
+                        byte[] test = { 12 };
+                        var maca = new Cosmos.System.Network.UdpClient();
+                        
+                        maca.Send(test, Sys.Network.IPv4.Address.Zero, 5001);                        
+                        
+                    }
+                    if (a.StartsWith("net -r"))
+                    {
+                     
+                    }
+
+
+                    if (a.StartsWith("texteditor"))
+                    {
+                        
                     }
                     if (a.StartsWith("print "))
                     {
@@ -98,11 +291,7 @@ namespace RobDEV_DOS
 
                     if (a.StartsWith("randomnumber"))
                     {
-                        var ran = new AIC_Framework.Random();
-                        ran.Next(0, 999999999);
-                        string num = ran.ToString();
-                        Console.WriteLine(num);
-
+                        
                     }
 
 
@@ -112,13 +301,6 @@ namespace RobDEV_DOS
                     {
                         RDOS.OS.program.CodeEditor.ProgramCD.init(a.Substring(12));
 
-                    }
-
-                    if (input == "gui")
-                    {
-                        Console.Clear();
-
-                        RDOS.gui.gl.gll();
                     }
 
                     if (input == "files")
@@ -131,45 +313,36 @@ namespace RobDEV_DOS
 
 
 
-                    if (a.StartsWith("speaker"))
-                    {
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(0x001);
-                        AIC.Core.PCSpeaker.sound_off();
-
-                    }
-                    if (a.StartsWith("speaker C#"))
-                    {
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(01);
-                        AIC.Core.PCSpeaker.sound_off();
-                    }
-                    if (a.StartsWith("speaker D"))
-                    {
-                        AIC.Core.PCSpeaker.sound_on();
-                        AIC.Core.PCSpeaker.Beep(02);
-                        AIC.Core.PCSpeaker.sound_off();
-                    }
+    
 
 
                     if (input == "about")
                     {
-                        string ram = AIC.Core.GetRAM.GetAmountOfRAM.ToString();
-                        Console.WriteLine("Version:" + VersionNum + Versiont);
-                        Console.WriteLine("Ram Memory:" + ram);
+                        string ram = Cosmos.Core.CPU.GetAmountOfRAM().ToString();
+                        string MACAddress = RDOS.Network.GetMACAddress();
+                        
+                        string date = "Month: " + RTC.Month.ToString() + " Day: " + RTC.DayOfTheMonth.ToString() + "\nYear: " + RTC.Year.ToString();
+                        string time = RTC.Hour.ToString() + ":" + RTC.Minute.ToString() + ":" + RTC.Second.ToString();
+
+                        Console.WriteLine("time: " + time);
+                        Console.WriteLine("date: " + date);
+                        Console.WriteLine("Version: " + VersionNum + Versiont);
+                        Console.WriteLine("Ram Memory: " + ram);
+                        Console.WriteLine("MACAddress: " + MACAddress);
                     }
                     if (input == "shutdown")
                     {
-                        AIC.Core.ACPI.Shutdown();
+                        Cosmos.HAL.Power.ACPIShutdown();
                     }
                     if (input == "reboot")
                     {
-                        AIC.Core.ACPI.Reboot();
+                        Cosmos.HAL.Power.ACPIReboot();
                     }
                     if (input == "time")
                     {
-                        string time = AIC.Hardware.RTC.Now.GetTime(AIC.Hardware.RTC.Now.TimeFormat.hh_mm_ss);
-                        string date = AIC.Hardware.RTC.Now.GetDate(AIC.Hardware.RTC.Now.DateFormat.DD_MM_YYYY);
+                        string time = Cosmos.HAL.RTC.Hour.ToString() + " " + Cosmos.HAL.RTC.Minute.ToString();
+                        string date = Cosmos.HAL.RTC.DayOfTheWeek.ToString() + " " + Cosmos.HAL.RTC.Month.ToString() + " " + Cosmos.HAL.RTC.Year.ToString();
+
                         Console.WriteLine("time:" + time);
                         Console.WriteLine("date:" + date);
 
@@ -179,8 +352,7 @@ namespace RobDEV_DOS
 
                     if (input == "test")
                     {
-                        AIC_Framework.Bluescreen.Init("RD 0001", "Cannot enter test mode", true);
-                        //RDOS.testkeyboard.test();
+                       
                     }
 
                     if (input == "rdbasic")
